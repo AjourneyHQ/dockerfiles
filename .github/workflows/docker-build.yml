@@ -30,4 +30,4 @@ jobs:
         with:
           context: ./rails
           push: true
-          tags: cayt3r:rails
+          tags: cayt3r/rails
