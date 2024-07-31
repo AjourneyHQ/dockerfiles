@@ -25,7 +25,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build/Push Rails Base
         uses: docker/build-push-action@v6
         with:
           context: ./rails
@@ -34,3 +34,13 @@ jobs:
             linux/arm64
           push: true
           tags: cayt3r/rails
+
+      - name: Build/Push Rails Build
+        uses: docker/build-push-action@v6
+        with:
+          context: ./rails-build
+          platforms: |
+            linux/amd64
+            linux/arm64
+          push: true
+          tags: cayt3r/rails-build
