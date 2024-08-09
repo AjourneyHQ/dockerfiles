@@ -19,6 +19,6 @@ RUN apt update -qq && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install NodeJS for SSR
-ARG NODE_VERSION=22.3.0
+ARG NODE_VERSION=22.4.1
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node
