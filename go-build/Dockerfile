@@ -8,3 +8,6 @@ RUN apt update -qq && \
 # Install JavaScript dependencies
 ARG BUN_VERSION=1.1.20
 RUN npm install -g bun@$BUN_VERSION
+
+# Install Doppler CLI
+RUN curl -Ls --tlsv1.2 --proto "=https" --retry 3 https://cli.doppler.com/install.sh | sh
