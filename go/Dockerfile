@@ -1,4 +1,4 @@
-ARG GO_VERSION=1.22.5
+ARG GO_VERSION=1.23.0
 FROM golang:${GO_VERSION} as base
 
 WORKDIR /go/src/app
@@ -12,7 +12,7 @@ RUN apt update -qq && \
     apt install --no-install-recommends -y curl && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Install NodeJS for SSR
-ARG NODE_VERSION=22.4.1
+# Install NodeJS
+ARG NODE_VERSION=22.5.1
 RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
     /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node
