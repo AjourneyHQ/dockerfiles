@@ -67,7 +67,7 @@ jobs:
       - name: Build/Push NodeJS With Deno Base
         uses: docker/build-push-action@v6
         with:
-          context: ./nodejs-deno-base
+          context: ./nodejs-base
           platforms: |
             linux/amd64
             linux/arm64
@@ -76,4 +76,5 @@ jobs:
             cayt3r/nodejs-deno-base:${{ matrix.nodejs-version }}
             cayt3r/nodejs-deno-base:${{ matrix.nodejs-version }}-latest
           build-args: |
+            INSTALL_DENO=true
             NODEJS_VERSION=${{ matrix.nodejs-version }}
