@@ -6,8 +6,11 @@ on:
       - main
 
 jobs:
-  go:
+  nodejs-base:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        node-version: ['22.8.0']
 
     steps:
       - name: Checkout repository
@@ -25,18 +28,25 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build/Push Go Base
+      - name: Build/Push NodeJS Base
         uses: docker/build-push-action@v6
         with:
-          context: ./go
+          context: ./nodejs-base
           platforms: |
             linux/amd64
             linux/arm64
           push: true
-          tags: cayt3r/go
+          tags: |
+            cayt3r/nodejs-base:${{ matrix.nodejs-version }}
+            cayt3r/nodejs-base:${{ matrix.nodejs-version }}-latest
+          build-args: |
+            NODEJS_VERSION=${{ matrix.nodejs-version }}
 
-  go-build:
+  nodejs-deno-base:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        node-version: ['22.8.0']
 
     steps:
       - name: Checkout repository
@@ -54,70 +64,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build/Push Go Build
+      - name: Build/Push NodeJS With Deno Base
         uses: docker/build-push-action@v6
         with:
-          context: ./go-build
+          context: ./nodejs-deno-base
           platforms: |
             linux/amd64
             linux/arm64
           push: true
-          tags: cayt3r/go-build
-
-  rails:
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build/Push Rails Base
-        uses: docker/build-push-action@v6
-        with:
-          context: ./rails
-          platforms: |
-            linux/amd64
-            linux/arm64
-          push: true
-          tags: cayt3r/rails
-
-  rails-build:
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build/Push Rails Build
-        uses: docker/build-push-action@v6
-        with:
-          context: ./rails-build
-          platforms: |
-            linux/amd64
-            linux/arm64
-          push: true
-          tags: cayt3r/rails-build
+          tags: |
+            cayt3r/nodejs-deno-base:${{ matrix.nodejs-version }}
+            cayt3r/nodejs-deno-base:${{ matrix.nodejs-version }}-latest
+          build-args: |
+            NODEJS_VERSION=${{ matrix.nodejs-version }}
