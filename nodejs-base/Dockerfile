@@ -12,5 +12,5 @@ ENV DENO_INSTALL="/usr/local"
 
 RUN if [ "$INSTALL_DENO" = "true" ]; then \
       curl -fsSL https://deno.land/install.sh | sh && \
-      deno upgrade --version 1.46.3; \
+      deno upgrade --version 2.0.0; \
     fi
