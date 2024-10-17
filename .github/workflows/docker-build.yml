@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        nodejs-version: ['22.8.0']
+        nodejs-version: ['22.9.0']
 
     steps:
       - name: Checkout repository
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        nodejs-version: ['22.8.0']
+        nodejs-version: ['22.9.0']
 
     steps:
       - name: Checkout repository
