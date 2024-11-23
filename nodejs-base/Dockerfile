@@ -6,11 +6,3 @@ RUN apt update -qq && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/archives
 
 RUN npm install -g pnpm@9.12.2
-
-ARG INSTALL_DENO=false
-ENV DENO_INSTALL="/usr/local"
-
-RUN if [ "$INSTALL_DENO" = "true" ]; then \
-      curl -fsSL https://deno.land/install.sh | sh && \
-      deno upgrade --version 2.0.0; \
-    fi
