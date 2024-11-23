@@ -41,6 +41,3 @@ jobs:
             cayt3r/nodejs-base:${{ matrix.nodejs-version }}-latest
           build-args: |
             NODEJS_VERSION=${{ matrix.nodejs-version }}
-
-            INSTALL_DENO=true
-            NODEJS_VERSION=${{ matrix.nodejs-version }}
