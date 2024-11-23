@@ -42,39 +42,5 @@ jobs:
           build-args: |
             NODEJS_VERSION=${{ matrix.nodejs-version }}
 
-  nodejs-deno-base:
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        nodejs-version: ['22.9.0', '22.11.0']
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to DockerHub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build/Push NodeJS With Deno Base
-        uses: docker/build-push-action@v6
-        with:
-          context: ./nodejs-base
-          platforms: |
-            linux/amd64
-            linux/arm64
-          push: true
-          tags: |
-            cayt3r/nodejs-deno-base:${{ matrix.nodejs-version }}
-            cayt3r/nodejs-deno-base:${{ matrix.nodejs-version }}-latest
-          build-args: |
             INSTALL_DENO=true
             NODEJS_VERSION=${{ matrix.nodejs-version }}
