@@ -37,7 +37,7 @@ jobs:
             linux/arm64
           push: true
           tags: |
-            cayt3r/nodejs-base:${{ matrix.nodejs-version }}
-            cayt3r/nodejs-base:${{ matrix.nodejs-version }}-latest
+            thomasjiangcy/nodejs-base:${{ matrix.nodejs-version }}
+            thomasjiangcy/nodejs-base:${{ matrix.nodejs-version }}-latest
           build-args: |
             NODEJS_VERSION=${{ matrix.nodejs-version }}
