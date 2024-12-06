@@ -1,4 +1,4 @@
-ARG NODEJS_VERSION=22.8.0
+ARG NODEJS_VERSION=22.11.0
 FROM node:${NODEJS_VERSION}-bullseye-slim AS base
 
 RUN apt update -qq && \
